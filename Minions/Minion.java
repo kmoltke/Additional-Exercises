@@ -5,5 +5,7 @@ public class Minion {
     private boolean minionStatus;
     private int minionPoints;
 
-    
+    public Minion(String name) {
+        this.name = name;
+    }
 }

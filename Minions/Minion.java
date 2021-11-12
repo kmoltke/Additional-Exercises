@@ -7,5 +7,7 @@ public class Minion {
 
     public Minion(String name) {
         this.name = name;
+        minionPoints = 1;
+        minionStatus = true;
     }
 }

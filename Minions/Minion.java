@@ -43,4 +43,18 @@ public class Minion {
         minionPoints = 1;
         System.out.println(name + " is now a minion.");
     }
+
+    public void givePoints(int points) {
+        if (points < 0) {
+            throw new Exception("Can't give negative points");
+        }
+
+        if (!minionStatus) {
+            throw new Exception("Can't give points to absent minion");
+        }
+
+        else {
+            minionPoints += points;
+        }
+    }
 }

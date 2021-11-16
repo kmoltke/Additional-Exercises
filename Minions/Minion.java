@@ -31,4 +31,10 @@ public class Minion {
             System.out.println(name + " is not a minion... anymore.");
         }
     }
+
+    public void undoMinion() {
+        minionStatus = false;
+        minionPoints = 0;
+        System.out.println(name + " is no longer a minion and has lost all minion privileges.");
+    }
 }

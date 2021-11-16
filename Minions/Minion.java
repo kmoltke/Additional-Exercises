@@ -10,4 +10,8 @@ public class Minion {
         minionPoints = 1;
         minionStatus = true;
     }
+
+    public String getName() {
+        return name;
+    }
 }

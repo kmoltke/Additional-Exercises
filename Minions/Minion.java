@@ -52,8 +52,12 @@ public class Minion {
             }
             minionPoints += points;
             
-        } catch (Exception e) {
-            //TODO: handle exception
+        } 
+        catch (NegativePointsException e) {
+            System.out.println(e.getMessage());
+        }
+        catch (AbsentMinionException e) {
+            System.out.println(e.getMessage());
         }
 
 

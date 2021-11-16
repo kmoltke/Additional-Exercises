@@ -22,4 +22,13 @@ public class Minion {
     public String evilLaugh() {
         return "Muahahaha";
     }
+
+    public void printMinionStatus() {
+        if (minionStatus) {
+            System.out.println(name + " is a minion.");
+            System.out.println(evilLaugh());
+        } else {
+            System.out.println(name + " is not a minion... anymore.");
+        }
+    }
 }

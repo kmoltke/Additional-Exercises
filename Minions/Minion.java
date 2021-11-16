@@ -1,5 +1,3 @@
-package Minions;
-
 public class Minion {
     private String name;
     private boolean minionStatus;
@@ -45,20 +43,25 @@ public class Minion {
     }
 
     public void givePoints(int points) {
-        if (points < 0) {
-            throw new Exception("Can't give negative points");
-        }
-
-        if (!minionStatus) {
-            throw new Exception("Can't give points to absent minion");
-        }
-
-        else {
+        try {
+            if (points < 0) {
+                throw new NegativePointsException();
+            }
+            if (!minionStatus) {
+                throw new AbsentMinionException();
+            }
             minionPoints += points;
+            
+        } catch (Exception e) {
+            //TODO: handle exception
         }
+
+
+
+        
     }
 
     public void revokePoints(int points) {
-        
+
     }
 }

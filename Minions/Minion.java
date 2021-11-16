@@ -54,10 +54,10 @@ public class Minion {
             
         } 
         catch (NegativePointsException e) {
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         }
         catch (AbsentMinionException e) {
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         }
     }
 
@@ -72,7 +72,7 @@ public class Minion {
                 undoMinion();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
         }
     }
 }

@@ -14,4 +14,8 @@ public class Minion {
     public String getName() {
         return name;
     }
+
+    public int getMinionPoints() {
+        return minionPoints;
+    }
 }

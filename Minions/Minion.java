@@ -42,7 +42,7 @@ public class Minion {
         System.out.println(name + " is now a minion.");
     }
 
-    public void givePoints(int points) {
+    public void givePoints(int points){
         try {
             if (points < 0) {
                 throw new NegativePointsException();
@@ -59,13 +59,20 @@ public class Minion {
         catch (AbsentMinionException e) {
             System.out.println(e.getMessage());
         }
-
-
-
-        
     }
 
     public void revokePoints(int points) {
+        try {
+            if (points < 0) {
+                throw new NegativePointsException();
+            }
 
+            minionPoints -= points;
+            if (minionPoints < 0) {
+                undoMinion();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

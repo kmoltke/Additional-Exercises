@@ -18,4 +18,8 @@ public class Minion {
     public int getMinionPoints() {
         return minionPoints;
     }
+
+    public String evilLaugh() {
+        return "Muahahaha";
+    }
 }

@@ -57,4 +57,8 @@ public class Minion {
             minionPoints += points;
         }
     }
+
+    public void revokePoints(int points) {
+        
+    }
 }

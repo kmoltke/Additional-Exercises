@@ -11,5 +11,11 @@ public class IceCreamShop {
         this.name = name;
         iceCreams = new ArrayList<>();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    
     
 }

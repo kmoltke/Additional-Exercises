@@ -25,7 +25,7 @@ public class IceCreamShop {
     }
 
     public void removeFlavours(String flavour) {
-        if (!iceCreamVariants.contains(flavour)) iceCreamVariants.remove(flavour);
+        if (iceCreamVariants.contains(flavour)) iceCreamVariants.remove(flavour);
     }
 
     public int amountOfVariants() {

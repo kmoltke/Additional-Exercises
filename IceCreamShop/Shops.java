@@ -6,4 +6,10 @@ public class Shops {
     public Shops() {
         shops = new ArrayList<>();
     }
+
+    public ArrayList<IceCreamShop> getIceCreamShops() {
+        return shops;
+    }
+
+    
 }

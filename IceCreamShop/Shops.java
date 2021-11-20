@@ -39,7 +39,9 @@ public class Shops {
 
         else {
             System.out.println("These are the shops that have the " + flavour + " variant:");
-            shopsWithFlavour(flavour).stream().forEach(System.out::println);
+            shopsWithFlavour(flavour).stream()
+                .map(IceCreamShop::getName)
+                .forEach(System.out::println);
         }
     }
 }

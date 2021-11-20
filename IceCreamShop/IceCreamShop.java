@@ -19,5 +19,9 @@ public class IceCreamShop {
     public ArrayList<String> getVariants() {
         return iceCreamVariants;
     }
+
+    public void addFlavours(String flavour) {
+        if (iceCreamVariants.contains(flavour)) iceCreamVariants.add(flavour);
+    }
     
 }

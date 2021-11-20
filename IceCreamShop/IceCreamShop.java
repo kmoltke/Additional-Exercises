@@ -5,17 +5,19 @@ import java.util.ArrayList;
  */
 public class IceCreamShop {
     private String name;
-    private ArrayList<String> iceCreams;
+    private ArrayList<String> iceCreamVariants;
 
     public IceCreamShop(String name) {
         this.name = name;
-        iceCreams = new ArrayList<>();
+        iceCreamVariants = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    
+    public ArrayList<String> getVariants() {
+        return iceCreamVariants;
+    }
     
 }

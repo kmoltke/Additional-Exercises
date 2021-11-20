@@ -31,4 +31,15 @@ public class Shops {
                 .collect(Collectors.toCollection(ArrayList::new));
         return shops;
     }
+
+    public void printShops(String flavour) {
+        if (shopsWithFlavour(flavour).isEmpty()) {
+            System.out.println("Oh no, there are no shops with the " + flavour + " variant");
+        }
+
+        else {
+            System.out.println("These are the shops that have the " + flavour + " variant:");
+            shopsWithFlavour(flavour).stream().forEach(System.out::println);
+        }
+    }
 }

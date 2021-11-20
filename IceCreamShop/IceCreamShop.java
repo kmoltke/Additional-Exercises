@@ -7,6 +7,9 @@ public class IceCreamShop {
     private String name;
     private ArrayList<String> iceCreams;
 
-    
+    public IceCreamShop(String name) {
+        this.name = name;
+        iceCreams = new ArrayList<>();
+    }
     
 }

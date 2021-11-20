@@ -18,4 +18,8 @@ public class Shops {
     public void removeShop(IceCreamShop shop) {
         if (shops.contains(shop)) shops.remove(shop);
     }
+
+    public int amountOfShops() {
+        return shops.size();
+    }
 }

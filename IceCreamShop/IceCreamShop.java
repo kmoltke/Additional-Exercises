@@ -21,7 +21,13 @@ public class IceCreamShop {
     }
 
     public void addFlavours(String flavour) {
-        if (iceCreamVariants.contains(flavour)) iceCreamVariants.add(flavour);
+        if (!iceCreamVariants.contains(flavour)) iceCreamVariants.add(flavour);
     }
+
+    public void removeFlavours(String flavour) {
+        if (!iceCreamVariants.contains(flavour)) iceCreamVariants.remove(flavour);
+    }
+
+    
     
 }

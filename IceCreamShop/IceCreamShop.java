@@ -1,0 +1,7 @@
+/**
+ * IceCreamShop
+ */
+public class IceCreamShop {
+    
+    
+}

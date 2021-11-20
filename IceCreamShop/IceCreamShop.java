@@ -31,5 +31,12 @@ public class IceCreamShop {
     public int amountOfVariants() {
         return iceCreamVariants.size();
     }
+
+    public void printFlavours() {
+        System.out.println(name + " has " + amountOfVariants() + "different flavours:");
+        for (String variant : iceCreamVariants) {
+            System.out.println(variant);
+        }
+    }
     
 }

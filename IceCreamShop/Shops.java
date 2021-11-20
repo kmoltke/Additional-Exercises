@@ -11,5 +11,9 @@ public class Shops {
         return shops;
     }
 
+    public void addShop(IceCreamShop shop) {
+        if (!shops.contains(shop)) shops.add(shop);
+    }
+
     
 }

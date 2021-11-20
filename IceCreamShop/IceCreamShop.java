@@ -33,7 +33,7 @@ public class IceCreamShop {
     }
 
     public void printFlavours() {
-        System.out.println(name + " has " + amountOfVariants() + "different flavours:");
+        System.out.println(name + " has " + amountOfVariants() + " different flavours:");
         for (String variant : iceCreamVariants) {
             System.out.println(variant);
         }

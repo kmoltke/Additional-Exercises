@@ -15,5 +15,7 @@ public class Shops {
         if (!shops.contains(shop)) shops.add(shop);
     }
 
-    
+    public void removeShop(IceCreamShop shop) {
+        if (shops.contains(shop)) shops.remove(shop);
+    }
 }

@@ -53,12 +53,25 @@ public class DinoDatabase {
         return db.keySet();
     }
 
+    /**
+     * @source https://stackoverflow.com/questions/5911174/finding-key-associated-with-max-value-in-a-java-map
+     */
+    public String getHeaviest() {
+        // int max = db.entrySet().stream()
+        //             .map(d -> d.getValue())
+        //             .max(Integer::compare).get();
+        return db.entrySet().stream()
+            .max((d1, d2) -> Integer.compare(d1.getValue(), d2.getValue()))
+            .get()
+            .getKey();
+    }
+
     public static void main(String[] args) {
         DinoDatabase ddb = new DinoDatabase();
         ddb.addDino("testDino1", 25);
-        ddb.addDino("testDino2", 25);
-        ddb.addDino("testDino3", 25);
-        ddb.addDino("testDino4", 25);
-        Set<String> set = ddb.getDinoNames();
+        ddb.addDino("testDino2", 0);
+        ddb.addDino("testDino3", 50);
+        ddb.addDino("testDino4", 4);
+        System.out.println(ddb.getHeaviest());
     }
 }

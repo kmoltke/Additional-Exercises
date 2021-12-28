@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * DinoDatabase
@@ -45,13 +47,18 @@ public class DinoDatabase {
             System.out.println(name + " cannot be found in the database!");
             return 0;
         }
-        
+    }
+
+    public Set<String> getDinoNames() {
+        return db.keySet();
     }
 
     public static void main(String[] args) {
         DinoDatabase ddb = new DinoDatabase();
-        ddb.addDino("testDino", 25);
-        ddb.removeDino("testDino");
-        ddb.removeDino("testDino");
+        ddb.addDino("testDino1", 25);
+        ddb.addDino("testDino2", 25);
+        ddb.addDino("testDino3", 25);
+        ddb.addDino("testDino4", 25);
+        Set<String> set = ddb.getDinoNames();
     }
 }

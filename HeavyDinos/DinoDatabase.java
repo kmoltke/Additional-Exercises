@@ -14,5 +14,10 @@ public class DinoDatabase {
     public int size() {
         return db.size();
     }
+
+    public void addDino(String name, int weight) {
+        db.put(name, weight);
+    }
+    
     
 }

@@ -38,6 +38,16 @@ public class DinoDatabase {
         System.out.println(msg);
     }
 
+    public int getWeight(String name) {
+        if (db.containsKey(name)) {
+            return db.get(name);
+        } else {
+            System.out.println(name + " cannot be found in the database!");
+            return 0;
+        }
+        
+    }
+
     public static void main(String[] args) {
         DinoDatabase ddb = new DinoDatabase();
         ddb.addDino("testDino", 25);

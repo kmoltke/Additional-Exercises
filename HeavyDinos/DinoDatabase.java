@@ -23,5 +23,14 @@ public class DinoDatabase {
             System.out.println(name + " added. Weight: " + weight + "kg");
         }
     }
-    
+
+    public void updateDino(String name, int weight) {
+        if (db.containsKey(name)) {
+            db.put(name, weight);
+            System.out.println(name + " updated. Weight: " + weight + "kg");
+        } else {
+            System.out.println(name + " cannot be updated. It is not in the database!");
+        }
+    }
+
 }

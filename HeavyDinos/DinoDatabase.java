@@ -33,4 +33,15 @@ public class DinoDatabase {
         }
     }
 
+    public void removeDino(String name) {
+        String msg = db.remove(name) == null ? name + " cannot be removed. It is not in the database!" : name + " removed";
+        System.out.println(msg);
+    }
+
+    public static void main(String[] args) {
+        DinoDatabase ddb = new DinoDatabase();
+        ddb.addDino("testDino", 25);
+        ddb.removeDino("testDino");
+        ddb.removeDino("testDino");
+    }
 }

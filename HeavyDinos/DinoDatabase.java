@@ -16,8 +16,12 @@ public class DinoDatabase {
     }
 
     public void addDino(String name, int weight) {
-        db.put(name, weight);
+        if (db.containsKey(name)) {
+            System.out.println(name + " cannot be added. It is already in the database!");
+        } else {
+            db.put(name, weight);
+            System.out.println(name + " added. Weight: " + weight + "kg");
+        }
     }
-    
     
 }

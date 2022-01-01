@@ -60,10 +60,11 @@ public class DinoDatabase {
         // int max = db.entrySet().stream()
         //             .map(d -> d.getValue())
         //             .max(Integer::compare).get();
-        return db.entrySet().stream()
-            .max((d1, d2) -> Integer.compare(d1.getValue(), d2.getValue()))
-            .get()
-            .getKey();
+        String output = db.isEmpty() ? "" : db.entrySet().stream()
+                                                .max((d1, d2) -> Integer.compare(d1.getValue(), d2.getValue()))
+                                                .get()
+                                                .getKey();
+        return output;
     }
 
     public static void main(String[] args) {

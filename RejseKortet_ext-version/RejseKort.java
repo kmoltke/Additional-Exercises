@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * @author Kristian Moltke Reitzel
  * 
- * RejseKort
+ *         RejseKort
  * 
  */
 public class RejseKort {
@@ -24,10 +24,11 @@ public class RejseKort {
 
     public void depositMoney(int dkk) {
         try {
-            if (dkk < 0) throw new NegativeAmountException();
+            if (dkk < 0)
+                throw new NegativeAmountException();
             balance += dkk;
             System.out.println(dkk + " DKK deposited. New balance: " + balance + " DKK");
-            
+
         } catch (NegativeAmountException e) {
             System.out.println(e.getMessage());
         }
@@ -35,7 +36,8 @@ public class RejseKort {
     }
 
     public boolean isCheckedIn(int timeStamp) {
-        // System.out.println(timeTraveled(timeStamp) + " minutes passed since last check in");
+        // System.out.println(timeTraveled(timeStamp) + " minutes passed since last
+        // check in");
         return isCheckedIn && timeTraveled(timeStamp) <= 120 ? true : false;
     }
 
@@ -45,50 +47,57 @@ public class RejseKort {
 
     public void checkIn(int x, int y, int timeStamp) {
         try {
-            if (isCheckedIn && timeTraveled(timeStamp) > 120) missingCheckOut(x, y, timeStamp);
+            if (isCheckedIn && timeTraveled(timeStamp) > 120)
+                throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice());
 
-            if (balance < 100) throw new NotEnoughMoneyException(balance);
+            if (balance < 100)
+                throw new NotEnoughMoneyException(balance);
 
             addCoordinates(x, y);
             if (isCheckedIn) {
-                System.out.println("Continued journey (" + Math.abs(timeTraveled(timeStamp)) + " minutes since last check in)");
+                System.out.println(
+                        "Continued journey (" + Math.abs(timeTraveled(timeStamp)) + " minutes since last check in)");
                 this.timeStamp = timeStamp;
             }
-            
+
             else {
                 isCheckedIn = true;
                 this.timeStamp = timeStamp;
                 System.out.println("Checked in");
             }
-            
+
         } catch (NotEnoughMoneyException e) {
             System.out.println(e.getMessage());
         } catch (MissingCheckOutException e) {
-            System.out.println(e.getMessage());
+            handleMissingCheckOut(x, y, e);
         }
-        
+
     }
 
-    private void missingCheckOut(int x, int y, int timeStamp) throws MissingCheckOutException {
+    private void handleMissingCheckOut(int x, int y, MissingCheckOutException e) {
         addCoordinates(x, y);
         setBalance();
         isCheckedIn = false;
-        throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice(), 50);
+        System.out.println(e.getMessage());
     }
 
     public void checkOut(int x, int y, int timeStamp) {
         try {
-            if (isCheckedIn && timeTraveled(timeStamp) > 120) missingCheckOut(x, y, timeStamp);
-            if (!isCheckedIn) throw new NotCheckedInException();
+            if (isCheckedIn && timeTraveled(timeStamp) > 120)
+                throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice());
+            if (!isCheckedIn)
+                throw new NotCheckedInException();
             addCoordinates(x, y);
             setBalance();
             isCheckedIn = false;
-            System.out.println("Checked out! " + Math.abs(timeTraveled(timeStamp)) + " minutes since last check in. Price is " + calculatePrice() + " DKK, remaining balance is " + balance + " DKK");
-            
+            System.out.println(
+                    "Checked out! " + Math.abs(timeTraveled(timeStamp)) + " minutes since last check in. Price is "
+                            + calculatePrice() + " DKK, remaining balance is " + balance + " DKK");
+
         } catch (NotCheckedInException e) {
             System.out.println(e.getMessage());
         } catch (MissingCheckOutException e) {
-            System.out.println(e.getMessage());
+            handleMissingCheckOut(x, y, e);
         }
     }
 
@@ -107,9 +116,9 @@ public class RejseKort {
         int minX = Collections.min(xCoords);
         int minY = Collections.min(yCoords);
         int result = 12 + (maxX - minX + maxY - minY) * 3;
-        if (result<=12) {
+        if (result <= 12) {
             return 12;
         }
         return result <= 50 ? result : 50;
-    }   
+    }
 }

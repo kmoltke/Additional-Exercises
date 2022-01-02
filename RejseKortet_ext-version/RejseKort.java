@@ -45,6 +45,8 @@ public class RejseKort {
 
     public void checkIn(int x, int y, int timeStamp) {
         try {
+            if (isCheckedIn && timeTraveled(timeStamp) > 120) missingCheckOut(x, y, timeStamp);
+
             if (balance < 100) throw new NotEnoughMoneyException(balance);
 
             addCoordinates(x, y);
@@ -61,21 +63,37 @@ public class RejseKort {
             
         } catch (NotEnoughMoneyException e) {
             System.out.println(e.getMessage());
+        } catch (MissingCheckOutException e) {
+            System.out.println(e.getMessage());
         }
         
     }
 
+    private void missingCheckOut(int x, int y, int timeStamp) throws MissingCheckOutException {
+        addCoordinates(x, y);
+        setBalance();
+        isCheckedIn = false;
+        throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice(), 50);
+    }
+
     public void checkOut(int x, int y, int timeStamp) {
         try {
+            if (isCheckedIn && timeTraveled(timeStamp) > 120) missingCheckOut(x, y, timeStamp);
             if (!isCheckedIn) throw new NotCheckedInException();
             addCoordinates(x, y);
-            balance = balance - Math.abs(calculatePrice());
+            setBalance();
             isCheckedIn = false;
             System.out.println("Checked out! " + Math.abs(timeTraveled(timeStamp)) + " minutes since last check in. Price is " + calculatePrice() + " DKK, remaining balance is " + balance + " DKK");
             
         } catch (NotCheckedInException e) {
             System.out.println(e.getMessage());
+        } catch (MissingCheckOutException e) {
+            System.out.println(e.getMessage());
         }
+    }
+
+    private void setBalance() {
+        balance = balance - Math.abs(calculatePrice());
     }
 
     public void addCoordinates(int x, int y) {

@@ -1,11 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        RejseKort r = new RejseKort();
-        // r.checkOut(1, 1, 500);
-        r.checkIn(1, 1, 1000);
-        r.checkOut(2, 2, 1010);
-        r.checkIn(3, 3, 1000);
-
+		RejseKort r;
+		r = new RejseKort();
+		r.depositMoney(1000);
+		r.checkIn(0, 0, 1000);
+		r.checkIn(0, 0, 1200);
+		r.checkIn(0, 0, 1400);
+		r.checkIn(0, 0, 1600);
+        
 
 
 

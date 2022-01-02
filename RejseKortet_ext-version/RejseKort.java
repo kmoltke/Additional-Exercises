@@ -9,15 +9,19 @@ import java.util.Set;
  * 
  */
 public class RejseKort {
-    private int balance;
+    private long balance;
     private boolean isCheckedIn;
-    private int timeStamp;
-    private Set<Integer> xCoords;
-    private Set<Integer> yCoords;
+    private long timeStamp;
+    private Set<Long> xCoords;
+    private Set<Long> yCoords;
+    private int missingCheckOuts;
+    private boolean isBlocked;
+    private final int FINEPRICE = 50;
 
     public RejseKort() {
         balance = 100;
         isCheckedIn = false;
+        isBlocked = false;
         xCoords = new HashSet<>();
         yCoords = new HashSet<>();
     }
@@ -35,18 +39,19 @@ public class RejseKort {
 
     }
 
-    public boolean isCheckedIn(int timeStamp) {
-        // System.out.println(timeTraveled(timeStamp) + " minutes passed since last
-        // check in");
+    public boolean isCheckedIn(long timeStamp) {
         return isCheckedIn && timeTraveled(timeStamp) <= 120 ? true : false;
     }
 
-    public int timeTraveled(int timeStamp) {
+    public long timeTraveled(long timeStamp) {
         return timeStamp - this.timeStamp;
     }
 
-    public void checkIn(int x, int y, int timeStamp) {
+    public void checkIn(long x, long y, int timeStamp) {
         try {
+            if (isBlocked)
+                throw new CardBlockedException();
+
             if (isCheckedIn && timeTraveled(timeStamp) > 120)
                 throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice());
 
@@ -70,18 +75,23 @@ public class RejseKort {
             System.out.println(e.getMessage());
         } catch (MissingCheckOutException e) {
             handleMissingCheckOut(x, y, e);
+            checkIn(x, y, timeStamp);
+        } catch (CardBlockedException e) {
+            System.out.println(e.getMessage());
         }
 
     }
 
-    private void handleMissingCheckOut(int x, int y, MissingCheckOutException e) {
-        addCoordinates(x, y);
+    private void handleMissingCheckOut(long x, long y, MissingCheckOutException e) {
         setBalance();
+        balance = balance - FINEPRICE;
         isCheckedIn = false;
+        missingCheckOuts++;
+        if (missingCheckOuts >= 3) isBlocked = true;
         System.out.println(e.getMessage());
     }
 
-    public void checkOut(int x, int y, int timeStamp) {
+    public void checkOut(long x, long y, int timeStamp) {
         try {
             if (isCheckedIn && timeTraveled(timeStamp) > 120)
                 throw new MissingCheckOutException(timeTraveled(timeStamp), calculatePrice());
@@ -105,17 +115,17 @@ public class RejseKort {
         balance = balance - Math.abs(calculatePrice());
     }
 
-    public void addCoordinates(int x, int y) {
+    public void addCoordinates(long x, long y) {
         xCoords.add(x);
         yCoords.add(y);
     }
 
-    public int calculatePrice() {
-        int maxX = Collections.max(xCoords);
-        int maxY = Collections.max(yCoords);
-        int minX = Collections.min(xCoords);
-        int minY = Collections.min(yCoords);
-        int result = 12 + (maxX - minX + maxY - minY) * 3;
+    public long calculatePrice() {
+        long maxX = Collections.max(xCoords);
+        long maxY = Collections.max(yCoords);
+        long minX = Collections.min(xCoords);
+        long minY = Collections.min(yCoords);
+        long result = 12 + (maxX - minX + maxY - minY) * 3;
         if (result <= 12) {
             return 12;
         }
